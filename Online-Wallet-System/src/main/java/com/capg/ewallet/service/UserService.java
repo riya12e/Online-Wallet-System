@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.capg.ewallet.entities.WalletUser;
 
 @Service
-public interface WalletUserService {
+public interface UserService {
 
 	public WalletUser addUser(WalletUser user);
 	

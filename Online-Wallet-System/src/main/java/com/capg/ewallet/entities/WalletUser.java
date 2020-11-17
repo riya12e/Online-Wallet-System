@@ -1,23 +1,44 @@
 package com.capg.ewallet.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class WalletUser {
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="UserId")
 	private int userId;
+	
+	@Column(name="UserName")
 	private String userName;
+	
+	@Column(name="UserPassword")
 	private String password;
+	
+	@Column(name="Email")
 	private String email;
+	
+	@Column(name="Aadhar")
 	private long aadharNo;
+	
+	@Column(name="Contact")
 	private long contact;
+	
+	@Column(name="DOB")
 	private String dob;
-	private WalletAccount walletAccount;
+	
 	
 	public WalletUser() {
 		
 	}
 	
 	public WalletUser(int userId, String userName, String password, String email, long aadharNo, long contact,
-			String dob, WalletAccount walletAccount) {
+			String dob) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -26,7 +47,7 @@ public class WalletUser {
 		this.aadharNo = aadharNo;
 		this.contact = contact;
 		this.dob = dob;
-		this.walletAccount = walletAccount;
+		
 	}
 
 	public int getUserId() {
@@ -85,19 +106,7 @@ public class WalletUser {
 		this.dob = dob;
 	}
 
-	public WalletAccount getWalletAccount() {
-		return walletAccount;
-	}
-
-	public void setWalletAccount(WalletAccount walletAccount) {
-		this.walletAccount = walletAccount;
-	}
-
-	
-    
-	
-	
-	/*@Override
+/*@Override
 	public String toString() {
 		return "WalletUser [UserId=" + UserId + ", UserName=" + UserName + ", Password=" + Password + ", PhoneNumber="
 				+ PhoneNumber +  ", walletAccount=" + walletAccount + "]";

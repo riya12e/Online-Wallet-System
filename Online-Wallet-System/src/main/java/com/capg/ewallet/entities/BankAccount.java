@@ -1,81 +1,129 @@
 package com.capg.ewallet.entities;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 //import javax.persistence.Entity;
 
-
-
+@Entity
+@Table(name = "Bank_Account")
 public class BankAccount {
-	
-	
-	private int bankAccountNo;
-	private String holderName;
-	private String ifscCode;
-	private String accountType;
-	private WalletAccount walletAccount;
-	private String bankName;
+@Id
+@Column(name="account_id")
+@GeneratedValue(generator = "account_seq",strategy = GenerationType.SEQUENCE)
+@SequenceGenerator(name = "account_seq",sequenceName = "account_seq",allocationSize = 1)
+private long accountId;
 
-	
-	public BankAccount() {
-		super();
-	}
-	
-	
-	public BankAccount(int accountNo, String holderName, String ifscCode, String bankName,
-			WalletAccount walletAccount) {
-		super();
-		this.bankAccountNo = accountNo;
-		this.holderName = holderName;
-		this.ifscCode = ifscCode;
-		this.bankName = bankName;
-		this.walletAccount = walletAccount;
-	}
+@Column(name = "holder_name",length = 30)
+private String holderName;
+@Column(name = "bank_name",length = 30)
+private String bankName;
+@Column(name = "branch_ifsc",length = 10)
+private String branchIfsc;
+@Column(name = "account_type",length = 10)
+private String accountType;
+@Column(name = "account_status",length = 10)
+private String accountStatus;
+@Column(name = "account_balance")
+private double accountBalance;
 
-	public WalletAccount getWalletAccount() {
-		return walletAccount;
-	}
+@ManyToOne(cascade = CascadeType.REMOVE)
+@JoinColumn(name = "wallet_id")
+private WalletAccount walletAccount;
 
-	public void setWalletAccount(WalletAccount walletAccount) {
-		this.walletAccount = walletAccount;
-	}
+public BankAccount() {
+super();
+}
 
-	
-	public int getAccountNo() {
-		return bankAccountNo;
-	}
+public BankAccount(long accountId, String holderName, String bankName, String branchIfsc, String accountType,
+String accountStatus, double accountBalance, WalletAccount walletAccount) {
+super();
+this.accountId = accountId;
+this.holderName = holderName;
+this.bankName = bankName;
+this.branchIfsc = branchIfsc;
+this.accountType = accountType;
+this.accountStatus = accountStatus;
+this.accountBalance = accountBalance;
+this.walletAccount = walletAccount;
+}
 
-	public void setAccountNo(int i) {
-		this.bankAccountNo = i;
-	}
+public long getAccountId() {
+return accountId;
+}
 
-	public String getHolderName() {
-		return holderName;
-	}
+public void setAccountId(long accountId) {
+this.accountId = accountId;
+}
 
-	public void setHolderName(String holderName) {
-		this.holderName = holderName;
-	}
+public String getHolderName() {
+return holderName;
+}
 
-	public String getIfscCode() {
-		return ifscCode;
-	}
+public void setHolderName(String holderName) {
+this.holderName = holderName;
+}
 
-	public void setIfscCode(String ifscCode) {
-		this.ifscCode = ifscCode;
-	}
+public String getBankName() {
+return bankName;
+}
 
-	public String getBankName() {
-		return bankName;
-	}
+public void setBankName(String bankName) {
+this.bankName = bankName;
+}
 
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
-	}
+public String getBranchIfsc() {
+return branchIfsc;
+}
 
-	
-	
-	
+public void setBranchIfsc(String branchIfsc) {
+this.branchIfsc = branchIfsc;
+}
+
+public String getAccountType() {
+return accountType;
+}
+
+public void setAccountType(String accountType) {
+this.accountType = accountType;
+}
+
+public String getAccountStatus() {
+return accountStatus;
+}
+
+public void setAccountStatus(String accountStatus) {
+this.accountStatus = accountStatus;
+}
+
+public double getAccountBalance() {
+return accountBalance;
+}
+
+public void setAccountBalance(double accountBalance) {
+this.accountBalance = accountBalance;
+}
+
+public WalletAccount getWalletAccount() {
+return walletAccount;
+}
+
+public void setWalletAccount(WalletAccount walletAccount) {
+this.walletAccount = walletAccount;
+}
 
 
-	
-	
+
 
 }
+
+
+

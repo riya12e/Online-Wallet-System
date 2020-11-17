@@ -2,7 +2,7 @@ package com.capg.ewallet.service;
 
 import com.capg.ewallet.entities.WalletAccount;
 
-public interface WalletAcoountService {
+public interface IWalletAccountService {
 
 	public WalletAccount createWalletAccount(WalletAccount account);
 	
@@ -12,6 +12,6 @@ public interface WalletAcoountService {
 	
 	public WalletAccount deleteWalletAccount(int walletId);
 	
-
+     
 
 }

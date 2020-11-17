@@ -2,38 +2,68 @@ package com.capg.ewallet.entities;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity(name="WalletTransaction")
+@Table
 public class WalletTransaction {
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(length=5, name="transactionId")
 	private int transactionId;
+	
+	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "dateOfTransaction")
 	private LocalDateTime dateOfTransaction;
+	
+	@Column(name = "amount")
 	private double amount;
+	
+	@Column(name = "receiverAccountId")
 	private int receiverAccountId;
-	private int accountId;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "userId")
+	private WalletAccount senderAccountId;
+
+	@Column(name = "accountBalance")
 	private double accountBalance;
-	private int walletAccount;
+	
 	
 
 	public WalletTransaction(int transactionId, String description, LocalDateTime dateOfTransaction,
-			 double amount, int receiverAccountId, int accountId, double accountBalance, int walletAccount) {
+			 double amount, int receiverAccountId, WalletAccount senderAccountId, double accountBalance ) {
 		super();
 		this.transactionId = transactionId;
 		this.description = description;
 		this.dateOfTransaction = dateOfTransaction;
 		this.amount = amount;
 		this.receiverAccountId = receiverAccountId;
-		this.accountId = accountId;
+		this.senderAccountId = senderAccountId;
 		this.accountBalance = accountBalance;
-		this.walletAccount=walletAccount;
+		
 	}
 	
-	public int getAccountId() {
-		return accountId;
+	public WalletAccount getAccountId() {
+		return senderAccountId;
 	}
 
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
+	public void setAccountId(WalletAccount accountId) {
+		this.senderAccountId = accountId;
 	}
 
 	public WalletTransaction() {
@@ -88,19 +118,13 @@ public class WalletTransaction {
 	}
 	
 
-	public int getWalletAccount() {
-		return walletAccount;
-	}
-
-	public void setWalletAccount(int walletAccount) {
-		this.walletAccount = walletAccount;
-	}
-
+	
 	@Override
 	public String toString() {
 		return "WalletTransaction [transactionId=" + transactionId + ", description=" + description
 				+ ", dateOfTransaction=" + dateOfTransaction + ", amount=" + amount + ", receiverAccountId="
-				+ receiverAccountId + ", accountId=" + accountId + ", accountBalance=" + accountBalance + "]";
+				+ receiverAccountId + ", accountId="
+				+ ", accountBalance=" + accountBalance + "]";
 	}
 	
 	

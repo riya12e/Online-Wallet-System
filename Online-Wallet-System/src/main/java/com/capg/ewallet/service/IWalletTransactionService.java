@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.capg.ewallet.entities.WalletTransaction;
 
 @Service
-public interface WalletTransactionService {
+public interface IWalletTransactionService {
 
 
 	public void createTransaction(WalletTransaction transaction);

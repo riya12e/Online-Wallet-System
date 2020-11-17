@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.capg.ewallet.entities.BankAccount;
 
 @Service
-public interface BankAccountService {
+public interface IBankAccountService {
 
 	
 
