@@ -1,4 +1,4 @@
-package com.capg.onlineWallet.entities;
+package com.capg.ewallet.entities;
 
 public enum Status {
 	

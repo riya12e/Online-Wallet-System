@@ -1,21 +1,22 @@
-package com.capg.onlineWallet.entities;
+package com.capg.ewallet.entities;
 
 import java.time.LocalDateTime;
 
 public class WalletTransaction {
 
 	
-	int transactionId;
-	String description;
-	LocalDateTime dateOfTransaction;
-	double amount;
-	int receiverAccountId;
-	int accountId;
-	double accountBalance;
+	private int transactionId;
+	private String description;
+	private LocalDateTime dateOfTransaction;
+	private double amount;
+	private int receiverAccountId;
+	private int accountId;
+	private double accountBalance;
+	private int walletAccount;
 	
 
 	public WalletTransaction(int transactionId, String description, LocalDateTime dateOfTransaction,
-			 double amount, int receiverAccountId, int accountId, double accountBalance) {
+			 double amount, int receiverAccountId, int accountId, double accountBalance, int walletAccount) {
 		super();
 		this.transactionId = transactionId;
 		this.description = description;
@@ -24,6 +25,7 @@ public class WalletTransaction {
 		this.receiverAccountId = receiverAccountId;
 		this.accountId = accountId;
 		this.accountBalance = accountBalance;
+		this.walletAccount=walletAccount;
 	}
 	
 	public int getAccountId() {
@@ -83,6 +85,15 @@ public class WalletTransaction {
 
 	public void setAccountBalance(double accountBalance) {
 		this.accountBalance = accountBalance;
+	}
+	
+
+	public int getWalletAccount() {
+		return walletAccount;
+	}
+
+	public void setWalletAccount(int walletAccount) {
+		this.walletAccount = walletAccount;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.capg.onlineWallet.entities;
+package com.capg.ewallet.entities;
 //import javax.persistence.Entity;
 
 
@@ -9,6 +9,7 @@ public class BankAccount {
 	private int bankAccountNo;
 	private String holderName;
 	private String ifscCode;
+	private String accountType;
 	private WalletAccount walletAccount;
 	private String bankName;
 
