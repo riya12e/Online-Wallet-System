@@ -1,5 +1,6 @@
 package com.capg.ewallet.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -34,14 +35,6 @@ public class  WalletTransactionRepositoryImpl implements IWalletTransactionRepos
 		
 	}
 
-	@Override
-	public List<WalletTransaction> getTransactionByDate(int date) {
-		// TODO Auto-generated method stub
-		Query query=entityManager.createQuery("select b from WalletTransaction b where b.dateOfTransaction="+date);
-		List<WalletTransaction> transactions=query.getResultList();
-	        return transactions;
-	}
-	
 
 	@Override
 	public List<WalletTransaction> getAllTransactionById(int walletId) {

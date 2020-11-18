@@ -15,8 +15,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity(name="WalletTransaction")
-@Table
+@Entity
+@Table(name="transaction_tbl")
 public class WalletTransaction {
 
 	@Id
@@ -37,7 +37,7 @@ public class WalletTransaction {
 	private int receiverAccountId;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "senderAccountId")
 	private WalletAccount senderAccountId;
 
 	@Column(name = "accountBalance")

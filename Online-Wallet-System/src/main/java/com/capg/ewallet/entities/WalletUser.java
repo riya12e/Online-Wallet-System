@@ -1,12 +1,16 @@
 package com.capg.ewallet.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user_tbl")
 public class WalletUser {
 	
 	@Id
@@ -30,7 +34,7 @@ public class WalletUser {
 	private long contact;
 	
 	@Column(name="DOB")
-	private String dob;
+	private LocalDate dob;
 	
 	
 	public WalletUser() {
@@ -38,7 +42,7 @@ public class WalletUser {
 	}
 	
 	public WalletUser(int userId, String userName, String password, String email, long aadharNo, long contact,
-			String dob) {
+			LocalDate dob) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -98,11 +102,11 @@ public class WalletUser {
 		this.contact = contact;
 	}
 
-	public String getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 

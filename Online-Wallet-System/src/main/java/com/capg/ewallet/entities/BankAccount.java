@@ -3,18 +3,20 @@ package com.capg.ewallet.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 //import javax.persistence.Entity;
 
 @Entity
-@Table(name = "Bank_Account")
+@Table(name = "account_tbl")
 public class BankAccount {
 @Id
 @Column(name="account_id")
@@ -35,8 +37,8 @@ private String accountStatus;
 @Column(name = "account_balance")
 private double accountBalance;
 
-@ManyToOne(cascade = CascadeType.REMOVE)
-@JoinColumn(name = "wallet_id")
+@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+@JoinColumn(name = "WalletId")
 private WalletAccount walletAccount;
 
 public BankAccount() {
