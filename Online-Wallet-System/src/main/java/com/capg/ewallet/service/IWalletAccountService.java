@@ -11,7 +11,7 @@ public interface IWalletAccountService {
 	
 	public double updateBalance(WalletAccount account);
 	
-	public WalletAccount deleteWalletAccount(int walletId) throws WalletAccountNotFoundException;
+	public Double getBalance(int walletId) throws WalletAccountNotFoundException;
 	
      
 

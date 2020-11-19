@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.capg.ewallet.entities.WalletTransaction;
+import com.capg.ewallet.exception.LowBalanceException;
 import com.capg.ewallet.exception.TransactionNotFoundException;
 import com.capg.ewallet.exception.WalletAccountNotFoundException;
 
@@ -13,7 +14,7 @@ import com.capg.ewallet.exception.WalletAccountNotFoundException;
 public interface IWalletTransactionService {
 
 
-	public void createTransaction(WalletTransaction transaction) throws WalletAccountNotFoundException;
+	public void createTransaction(WalletTransaction transaction) throws WalletAccountNotFoundException, LowBalanceException;
 	
 	public double checkUpdatedBalance(int walletId) throws WalletAccountNotFoundException;
 	

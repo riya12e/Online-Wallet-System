@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.capg.ewallet.entities.WalletAccount;
 import com.capg.ewallet.entities.WalletTransaction;
+import com.capg.ewallet.exception.LowBalanceException;
 import com.capg.ewallet.exception.TransactionNotFoundException;
 import com.capg.ewallet.exception.WalletAccountNotFoundException;
 
@@ -29,37 +30,52 @@ public class WalletTransactionServiceImpl implements IWalletTransactionService {
 	
 	@Autowired 
 	IWalletAccountService walletAccountService;
+	
+	WalletAccount senderAccount = new WalletAccount();
+	WalletAccount receiverAccount = new WalletAccount();
 
 	@Override
-	public void createTransaction(WalletTransaction transaction) throws WalletAccountNotFoundException {
+	public void createTransaction(WalletTransaction transaction) throws WalletAccountNotFoundException, LowBalanceException {
 		// TODO Auto-generated method stub
+		 double senderFinalBalance = 0,receiverfinalBalance = 0 ;
 		LocalDateTime now = LocalDateTime.now();  
-		WalletAccount senderAccount = new WalletAccount();
-		WalletAccount receiverAccount = new WalletAccount();
-		   
-			 int recipientAccountId = transaction.getReceiverAccountId();
+		
+		    int recipientAccountId = transaction.getReceiverAccountId();
 			 int senderAccountId=transaction.getAccountId().getWalletId();
 		     double transferAmount = transaction.getAmount();
 			
 			 double senderPrevBalance = transaction.getAccountBalance();
+			 boolean a=validate(senderPrevBalance);
 			 receiverAccount = walletAccountService.showAccountById(transaction.getReceiverAccountId());
 			 
 			 double receiverPrevBalance = receiverAccount.getAccountBalance();
-			 double senderFinalBalance  = senderPrevBalance - transferAmount;
-			 double receiverfinalBalance = receiverPrevBalance + transferAmount;
+			 boolean b=validate(receiverPrevBalance);
+			 
+			 if(transferAmount < senderPrevBalance) {
+			  senderFinalBalance  = senderPrevBalance - transferAmount;
+			 receiverfinalBalance = receiverPrevBalance + transferAmount;
+			 }
+			 else
+				 System.out.println("Transaction is not possible");
 			 transaction.setAccountBalance(senderFinalBalance);
 			 receiverAccount.setAccountBalance(receiverfinalBalance);
 			 transaction.getAccountId().setAccountBalance(senderFinalBalance);
 			
-			 //senderFinalBalance = walletAccountService.updateBalance(senderAccount);
-			// receiverfinalBalance = walletAccountService.updateBalance(receiverAccount);
-			
+			 
 		     transaction.setDateOfTransaction(now);
-			 transaction.setAccountBalance(senderFinalBalance);
+			
 			 walletTransactionRepository.addTransaction(transaction);	
 }
 
-    @Override
+    private boolean validate(double PrevBalance) throws LowBalanceException {
+		// TODO Auto-generated method stub
+    	if(PrevBalance<500) {
+    		throw new LowBalanceException("Balance is low to perform transaction"+PrevBalance);
+    	}
+		return true;
+	}
+
+	@Override
 	public double checkUpdatedBalance(int walletId) throws WalletAccountNotFoundException {
 		// TODO Auto-generated method stub
 	 WalletAccount	walletAccount=walletAccountRepository.showAccountById(walletId);

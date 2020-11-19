@@ -29,7 +29,6 @@ public class WalletAccountServiceImpl implements IWalletAccountService {
 	//create wallet account
 	@Override
 	public WalletAccount createWalletAccount(WalletAccount account) {
-		account.setAccountBalance(0);
 		return walletAccountRepo.addWalletAccount(account);
 	}
 
@@ -45,22 +44,17 @@ public class WalletAccountServiceImpl implements IWalletAccountService {
 
 	@Override
 	public double updateBalance(WalletAccount account) {
-		/*int walletId=account.getAccountId();
-	    List<BankAccount> bankAccounts=bankAccountRepo.viewAllBankAccountsByWalletId(walletId);
-		double totalBalance = 0;*/
-		
-		return 0;
+		WalletAccount walletAccount =walletAccountRepo.updateBalance(account);
+		return walletAccount.getAccountBalance();
 	}
 
 	@Override
-	public WalletAccount deleteWalletAccount(int walletId) throws WalletAccountNotFoundException {
+	public Double getBalance(int walletId) throws WalletAccountNotFoundException {
 		// TODO Auto-generated method stub
 		WalletAccount walletAccount = walletAccountRepo.showAccountById(walletId);
 		if(walletAccount==null)
 			throw new WalletAccountNotFoundException("No walletAccount is found with given Id: "+walletId);
-		walletAccountRepo.deleteWalletAccount(walletId);
-		
-		return walletAccount;
+		return walletAccount.getAccountBalance();
 	}
 
 }
