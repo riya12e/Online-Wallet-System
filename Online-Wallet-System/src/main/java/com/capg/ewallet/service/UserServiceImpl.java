@@ -1,4 +1,6 @@
 package com.capg.ewallet.service;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -6,6 +8,7 @@ import com.capg.ewallet.entities.WalletUser;
 import com.capg.ewallet.exception.WalletUserException;
 import com.capg.ewallet.repository.IUserRepository;
 
+@Transactional
 @Service
 public class UserServiceImpl implements IUserService {
 

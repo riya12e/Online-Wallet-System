@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.ewallet.entities.WalletTransaction;
@@ -17,6 +18,7 @@ import com.capg.ewallet.service.IWalletAccountService;
 import com.capg.ewallet.service.IWalletTransactionService;
 
 @RestController
+
 public class WalletTransactionController {
 
 	    @Autowired

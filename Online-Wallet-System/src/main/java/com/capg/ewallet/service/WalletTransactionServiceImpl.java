@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.capg.ewallet.entities.WalletAccount;
 import com.capg.ewallet.entities.WalletTransaction;
@@ -15,7 +17,8 @@ import com.capg.ewallet.exception.WalletAccountNotFoundException;
 import com.capg.ewallet.repository.IWalletAccountRepository;
 import com.capg.ewallet.repository.IWalletTransactionRepository;
 
-
+@Transactional
+@Service
 public class WalletTransactionServiceImpl implements IWalletTransactionService {
 	
 	@Autowired 
@@ -35,7 +38,7 @@ public class WalletTransactionServiceImpl implements IWalletTransactionService {
 		WalletAccount receiverAccount = new WalletAccount();
 		   
 			 int recipientAccountId = transaction.getReceiverAccountId();
-			 int senderAccountId=transaction.getAccountId().getAccountId();
+			 int senderAccountId=transaction.getAccountId().getWalletId();
 		     double transferAmount = transaction.getAmount();
 			
 			 double senderPrevBalance = transaction.getAccountBalance();

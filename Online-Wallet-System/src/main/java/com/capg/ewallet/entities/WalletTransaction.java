@@ -11,16 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity
-@Table(name="transaction_tbl")
+@Entity(name="WalletTransaction")
+@Table
 public class WalletTransaction {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "transaction_seq",strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "transaction_seq",sequenceName = "transaction_seq",allocationSize = 1)
 	@Column(length=5, name="transactionId")
 	private int transactionId;
 	
@@ -37,7 +39,7 @@ public class WalletTransaction {
 	private int receiverAccountId;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "senderAccountId")
+	@JoinColumn(name = "WalletId")
 	private WalletAccount senderAccountId;
 
 	@Column(name = "accountBalance")

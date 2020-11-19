@@ -2,47 +2,56 @@ package com.capg.ewallet.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user_tbl")
 public class WalletUser {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="UserId")
+	@GeneratedValue(generator = "user_seq",strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "user_seq",sequenceName = "user_seq",allocationSize = 1)
+	@Column(name="user_id")
 	private int userId;
 	
-	@Column(name="UserName")
+	@Column(name="user_name")
 	private String userName;
 	
-	@Column(name="UserPassword")
+	@Column(name="user_password")
 	private String password;
 	
-	@Column(name="Email")
+	@Column(name="user_email")
 	private String email;
 	
-	@Column(name="Aadhar")
+	@Column(name="user_aadhar")
 	private long aadharNo;
 	
-	@Column(name="Contact")
+	@Column(name="user_contact")
 	private long contact;
 	
-	@Column(name="DOB")
+	@Column(name="user_dob")
 	private LocalDate dob;
 	
-	
+	@JsonIgnore
+	@OneToOne(mappedBy = "walletUser",cascade = CascadeType.REMOVE)
+	private WalletAccount walletAccount;
+
 	public WalletUser() {
-		
+		super();
 	}
-	
+
 	public WalletUser(int userId, String userName, String password, String email, long aadharNo, long contact,
-			LocalDate dob) {
+			LocalDate dob, WalletAccount walletAccount) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -51,7 +60,7 @@ public class WalletUser {
 		this.aadharNo = aadharNo;
 		this.contact = contact;
 		this.dob = dob;
-		
+		this.walletAccount = walletAccount;
 	}
 
 	public int getUserId() {
@@ -59,7 +68,7 @@ public class WalletUser {
 	}
 
 	public void setUserId(int userId) {
-		userId = userId;
+		this.userId = userId;
 	}
 
 	public String getUserName() {
@@ -67,7 +76,7 @@ public class WalletUser {
 	}
 
 	public void setUserName(String userName) {
-		userName = userName;
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -75,7 +84,7 @@ public class WalletUser {
 	}
 
 	public void setPassword(String password) {
-		password = password;
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -110,13 +119,13 @@ public class WalletUser {
 		this.dob = dob;
 	}
 
-/*@Override
-	public String toString() {
-		return "WalletUser [UserId=" + UserId + ", UserName=" + UserName + ", Password=" + Password + ", PhoneNumber="
-				+ PhoneNumber +  ", walletAccount=" + walletAccount + "]";
-	}*/
-	
-	
-	
+	public WalletAccount getWalletAccount() {
+		return walletAccount;
+	}
 
+	public void setWalletAccount(WalletAccount walletAccount) {
+		this.walletAccount = walletAccount;
+	}
+	
+	
 }

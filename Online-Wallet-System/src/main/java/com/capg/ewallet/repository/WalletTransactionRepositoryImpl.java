@@ -7,9 +7,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.capg.ewallet.entities.WalletTransaction;
+import com.capg.ewallet.entities.WalletUser;
 
-
+@Repository
 public class  WalletTransactionRepositoryImpl implements IWalletTransactionRepository {
 	
 	
@@ -29,8 +32,9 @@ public class  WalletTransactionRepositoryImpl implements IWalletTransactionRepos
 	@Override
 	public WalletTransaction getTransactionById(int transId) {
 		// TODO Auto-generated method stub
-		Query query=entityManager.createQuery("select b from WalletTransaction b where b.transactionId="+transId,WalletTransaction.class);
-		WalletTransaction transaction=(WalletTransaction)query.getResultList().get(0);
+		//Query query=entityManager.createQuery("select b from WalletTransaction b where b.transactionId=:transId"+transId,WalletTransaction.class);
+		//WalletTransaction transaction=(WalletTransaction)query.getResultList().get(0);
+		WalletTransaction transaction = entityManager.find(WalletTransaction.class,transId);
 		return transaction;
 		
 	}

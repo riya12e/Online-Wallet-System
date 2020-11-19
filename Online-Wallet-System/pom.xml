@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mtbs</groupId>
-	<artifactId>Movie-Ticket-Booking-System</artifactId>
+	<artifactId>Online-Wallet-System</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Movie-Ticket-Booking-System</name>
+	<name>Online-Wallet-System</name>
 	<description>Project for Spring Boot</description>
 
 	<properties>
@@ -47,5 +47,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 
 </project>
